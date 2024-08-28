@@ -19,13 +19,13 @@ h1 {
 
 .header-controls {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
 
 .header-controls p {
-    margin: 0;
+    margin-right: 20px;
 }
 
 #resetButton {
@@ -36,7 +36,6 @@ h1 {
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 10px; /* Space between total money and reset button */
 }
 
 #resetButton:hover {
@@ -45,17 +44,16 @@ h1 {
 
 .container {
     display: flex;
-    flex-direction: column; /* Stack sidebar and work area vertically */
+    flex-direction: row;
     width: 95vw;
-    max-width: 1000px; /* Increased max-width for better readability on larger devices */
+    max-width: 1200px;
     padding: 10px;
     gap: 20px;
-    margin-top: 20px;
+    margin-top: 20px; /* Reduced margin to move content up */
 }
 
 .sidebar {
-    width: 100%;
-    max-width: 500px; /* Limit width for better mobile view */
+    width: 200px;
     border: 2px solid #007BFF;
     border-radius: 10px;
     padding: 10px;
@@ -75,7 +73,7 @@ h1 {
 }
 
 .money-item img {
-    width: 60px; /* Smaller size for mobile */
+    width: 80px; /* Adjusted size */
     height: auto;
     cursor: grab;
 }
@@ -87,8 +85,8 @@ h1 {
     padding: 10px;
     background: linear-gradient(to bottom, #e0f7fa, #b3e5fc);
     display: flex;
-    flex-direction: column; /* Stack bills and coins area vertically */
-    gap: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .bills-work-area, .coins-work-area {
@@ -96,11 +94,12 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 10px;
     position: relative;
 }
 
 .bills-work-area {
-    border-bottom: 2px solid #007BFF; /* Separate bills and coins areas */
+    border-right: 2px solid #007BFF;
 }
 
 h3 {
@@ -111,6 +110,9 @@ h3 {
     border-radius: 5px;
     text-align: center;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .drop-area {
@@ -118,38 +120,42 @@ h3 {
     padding: 10px;
     border: 2px dashed #007BFF;
     border-radius: 10px;
-    min-height: 200px; /* Reduced height for mobile view */
+    min-height: 300px;
     background: linear-gradient(to bottom, #e0f7fa, #b3e5fc);
     overflow: hidden;
     width: 100%;
 }
 
 .dropped-bill, .dropped-coin {
-    width: 100px; /* Adjusted size for mobile visibility */
+    width: 120px; /* Larger size for visibility */
     height: auto;
 }
 
 .dropped-coin {
-    width: 50px; /* Adjusted size for coins */
+    width: 60px; /* 50% smaller for coins */
 }
 
-@media screen and (max-width: 768px) {
-    /* Adjustments for very small screens */
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .sidebar {
-        max-width: 100%;
         width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .work-area {
-        width: 100%;
-        max-width: 100%;
+        width: 90vw;
+        max-width: 600px;
+        flex-direction: column;
     }
 
     .drop-area {
-        min-height: 150px; /* Further reduced height for smaller screens */
-    }
-
-    #resetButton {
-        width: 100%; /* Full width for reset button */
+        width: 90%;
+        margin: 0 auto;
     }
 }
