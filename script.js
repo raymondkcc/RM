@@ -4,7 +4,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const totalMoneyDisplay = document.getElementById("totalMoney");
     const resetButton = document.getElementById("resetButton");
 
+    const coinAppearSound = document.getElementById("coinAppearSound");
+    const coinDisappearSound = document.getElementById("coinDisappearSound");
+
     let totalMoney = 0;
+
+    // Function to play a sound
+    function playSound(sound) {
+        sound.currentTime = 0; // Reset the sound to start
+        sound.play();
+    }
 
     // Function to add an item to the work area
     function addItem(value, src, alt, isBill) {
@@ -20,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
             totalMoney -= value;
             updateTotals();
             img.remove();
+            playSound(coinDisappearSound);
         });
 
         if (isBill) {
@@ -27,6 +37,9 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             coinsArea.appendChild(img);
         }
+
+        // Play sound effect when item appears
+        playSound(coinAppearSound);
 
         // Update the total money value
         totalMoney += value;
