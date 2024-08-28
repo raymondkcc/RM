@@ -6,6 +6,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let totalMoney = 0;
 
+    // Function to add an item to the work area
+    function addItem(value, src, alt, isBill) {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = alt;
+        img.classList.add(isBill ? "dropped-bill" : "dropped-coin");
+        img.style.width = isBill ? "120px" : "60px"; // Adjust size
+        img.style.height = "auto";
+
+        img.addEventListener("click", () => {
+            // Remove the item and update total money
+            totalMoney -= value;
+            updateTotals();
+            img.remove();
+        });
+
+        if (isBill) {
+            billsArea.appendChild(img);
+        } else {
+            coinsArea.appendChild(img);
+        }
+
+        // Update the total money value
+        totalMoney += value;
+        updateTotals();
+    }
+
     // Handle drag over for both areas
     [billsArea, coinsArea].forEach(area => {
         area.addEventListener("dragover", (e) => {
@@ -39,19 +66,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            // Create and add the image if placement is correct
-            const img = document.createElement("img");
-            img.src = src;
-            img.alt = alt;
-            img.classList.add(isBill ? "dropped-bill" : "dropped-coin");
-            img.style.width = isBill ? "120px" : "60px"; // Adjust size
-            img.style.height = "auto";
+            // Add the item
+            addItem(value, src, alt, isBill);
+        });
+    });
 
-            area.appendChild(img);
+    // Handle touch/click on sidebar items
+    document.querySelectorAll(".sidebar .money-item img").forEach(img => {
+        img.addEventListener("click", () => {
+            const value = parseFloat(img.dataset.value);
+            const src = img.src;
+            const alt = img.alt;
 
-            // Update the total money value
-            totalMoney += value;
-            updateTotals();
+            // Determine if the clicked item is a bill or a coin
+            const isBill = value >= 1;
+
+            // Add the item to the appropriate work area
+            addItem(value, src, alt, isBill);
         });
     });
 
@@ -69,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Handle dragstart for draggable items
-    document.querySelectorAll(".money-item img").forEach(img => {
+    document.querySelectorAll(".sidebar .money-item img").forEach(img => {
         img.addEventListener("dragstart", (e) => {
             e.dataTransfer.setData("value", e.target.dataset.value);
             e.dataTransfer.setData("src", e.target.src);
