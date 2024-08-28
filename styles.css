@@ -159,3 +159,65 @@ h3 {
         margin: 0 auto;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0; /* Remove padding to use full screen width */
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px; /* Add some spacing below the sidebar */
+        padding: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .money-item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 10px;
+        width: 100%; /* Ensure it takes full width */
+        justify-content: center; /* Center items */
+    }
+
+    .money-item img {
+        width: 60px; /* Adjusted size for mobile */
+        height: auto;
+    }
+
+    .work-area {
+        width: 100%;
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .bills-work-area, .coins-work-area {
+        width: 100%;
+        margin-right: 0; /* Remove margin */
+    }
+
+    .drop-area {
+        width: 100%;
+        margin-top: 20px; /* Add space between title and drop area */
+        padding: 10px;
+        min-height: 200px; /* Reduce height for mobile */
+    }
+
+    .bills-work-area h3, .coins-work-area h3 {
+        margin: 0;
+        padding: 10px;
+        background: #007BFF;
+        color: #fff;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+        position: relative; /* Change to relative positioning */
+        z-index: 1; /* Ensure title is above other elements */
+    }
+}
